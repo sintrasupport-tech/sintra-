@@ -41,6 +41,12 @@
     --glass: rgba(255,255,255,0.045);
     --glass-border: rgba(255,255,255,0.09);
     --whatsapp: #25D366;
+    /* liquid-glass tokens — used across buttons, cards, containers, panels */
+    --glass-rim: rgba(255,255,255,0.45);
+    --glass-hi-top: inset 0 1.5px 2px rgba(255,255,255,0.6);
+    --glass-hi-top-hover: inset 0 1.5px 2px rgba(255,255,255,0.8);
+    --glass-hi-bottom: inset 0 -1.5px 2px rgba(0,0,0,0.35);
+    --glass-ambient: 0 10px 25px -5px rgba(0,0,0,0.3);
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
@@ -122,9 +128,10 @@
   header{
     position:fixed; top:0; left:0; right:0; z-index:50;
     background: rgba(7,6,11,0.55);
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
-    border-bottom:1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    border-bottom:1px solid rgba(255,255,255,0.14);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 10px 25px -5px rgba(0,0,0,0.3);
   }
   nav{
     display:flex; align-items:center; justify-content:space-between;
@@ -151,22 +158,36 @@
     display:inline-flex; align-items:center; gap:8px;
     padding:11px 22px; border-radius:999px; font-size:13.5px; font-weight:600;
     font-family:'Sora',sans-serif; letter-spacing:0.2px; cursor:pointer;
-    transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease, background .35s ease, border-color .35s ease;
     border:1px solid transparent; white-space:nowrap;
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
   }
   .btn-primary{
-    background: linear-gradient(135deg, var(--purple) 0%, var(--violet) 100%);
-    color:#fff; box-shadow: 0 0 0 rgba(168,85,247,0);
+    background: linear-gradient(135deg, rgba(168,85,247,0.9) 0%, rgba(109,40,217,0.9) 100%);
+    color:#fff; border-color: var(--glass-rim);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), var(--glass-ambient);
   }
   .btn-primary:hover{
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px -6px rgba(168,85,247,0.55);
+    border-color: rgba(255,255,255,0.65);
+    box-shadow: var(--glass-hi-top-hover), var(--glass-hi-bottom), 0 8px 30px -6px rgba(168,85,247,0.55);
+  }
+  .btn-primary:active{
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), 0 4px 14px -6px rgba(168,85,247,0.4);
   }
   .btn-ghost{
-    background: rgba(255,255,255,0.04);
-    border:1px solid var(--glass-border); color: var(--ink);
+    background: rgba(255,255,255,0.06);
+    border-color: var(--glass-rim); color: var(--ink);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), var(--glass-ambient);
   }
-  .btn-ghost:hover{ background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+  .btn-ghost:hover{
+    background: rgba(255,255,255,0.1); transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: var(--glass-hi-top-hover), var(--glass-hi-bottom), 0 10px 25px -5px rgba(0,0,0,0.35);
+  }
+  .btn-ghost:active{ transform: translateY(0) scale(0.98); }
 
   .btn-nav{ padding:9px 20px; font-size:13px; }
 
@@ -190,6 +211,8 @@
     font-family:'Sora',sans-serif; font-size:12.5px; letter-spacing:2.5px; text-transform:uppercase;
     color: var(--purple-bright); background: rgba(168,85,247,0.08);
     border:1px solid rgba(168,85,247,0.25); padding:8px 18px; border-radius:999px; margin-bottom:34px;
+    backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), 0 10px 25px -5px rgba(0,0,0,0.3);
   }
   .pulse-dot{
     width:6px; height:6px; border-radius:50%; background: var(--purple-bright);
@@ -242,22 +265,25 @@
     font-family:'Sora',sans-serif; font-size:14px; font-weight:600; color: var(--purple-bright);
     background: rgba(168,85,247,0.07); border:1px solid rgba(168,85,247,0.22);
     padding:12px 22px; border-radius:12px; line-height:1.5;
+    backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), 0 10px 25px -5px rgba(0,0,0,0.3);
   }
 
   /* ===== Pricing ===== */
   .pricing-grid{
-    display:grid; grid-template-columns: repeat(3, 1fr); gap:26px; align-items:stretch;
-    perspective:1000px;
+    display:grid; grid-template-columns: repeat(2, 1fr); gap:26px; align-items:stretch;
+    max-width:780px; margin:0 auto; perspective:1000px;
   }
   .card{
     background: var(--glass);
-    border:1px solid var(--glass-border);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border:1px solid var(--glass-rim);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
     border-radius:20px; padding:38px 30px;
     display:flex; flex-direction:column;
     position:relative; overflow:hidden;
     transition: border-color .45s ease, box-shadow .45s ease;
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), var(--glass-ambient);
   }
   .card::before{
     content:''; position:absolute; inset:0; opacity:0; transition:opacity .45s ease;
@@ -267,7 +293,7 @@
   .card:hover{
     transform: translateY(-8px);
     border-color: rgba(168,85,247,0.35);
-    box-shadow: 0 20px 50px -20px rgba(109,40,217,0.4);
+    box-shadow: var(--glass-hi-top-hover), var(--glass-hi-bottom), 0 20px 50px -20px rgba(109,40,217,0.4);
   }
   .card:hover::before{ opacity:1; }
 
@@ -275,9 +301,12 @@
     background: linear-gradient(180deg, rgba(168,85,247,0.10), rgba(109,40,217,0.05));
     border:1px solid rgba(192,132,252,0.4);
     transform: scale(1.03);
-    box-shadow: 0 25px 60px -20px rgba(168,85,247,0.35);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), 0 25px 60px -20px rgba(168,85,247,0.35);
   }
-  .card.featured:hover{ transform: scale(1.03) translateY(-8px); }
+  .card.featured:hover{
+    transform: scale(1.03) translateY(-8px);
+    box-shadow: var(--glass-hi-top-hover), var(--glass-hi-bottom), 0 25px 60px -20px rgba(168,85,247,0.4);
+  }
 
   .tier-badge{
     position:absolute; top:22px; right:22px; font-family:'Sora',sans-serif;
@@ -303,12 +332,16 @@
     display:grid; grid-template-columns: repeat(3, 1fr); gap:26px;
   }
   .process-card{
-    background: var(--glass); border:1px solid var(--glass-border);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: var(--glass); border:1px solid var(--glass-rim);
+    backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
     border-radius:20px; padding:40px 32px; position:relative;
-    transition: transform .45s ease, border-color .45s ease;
+    transition: transform .45s ease, border-color .45s ease, box-shadow .45s ease;
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), var(--glass-ambient);
   }
-  .process-card:hover{ transform: translateY(-6px); border-color: rgba(168,85,247,0.3); }
+  .process-card:hover{
+    transform: translateY(-6px); border-color: rgba(168,85,247,0.3);
+    box-shadow: var(--glass-hi-top-hover), var(--glass-hi-bottom), 0 16px 40px -18px rgba(109,40,217,0.35);
+  }
   .process-num{
     font-family:'Sora',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px;
     color: var(--purple-bright); margin-bottom:20px; display:block;
@@ -326,9 +359,10 @@
   .final-cta{
     text-align:center; max-width:760px; margin:0 auto; padding:90px 40px;
     background: linear-gradient(180deg, rgba(168,85,247,0.08), rgba(109,40,217,0.03));
-    border:1px solid var(--glass-border); border-radius:28px;
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border:1px solid var(--glass-rim); border-radius:28px;
+    backdrop-filter: blur(20px) saturate(160%); -webkit-backdrop-filter: blur(20px) saturate(160%);
     position:relative; overflow:hidden;
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), var(--glass-ambient);
   }
   .final-cta::after{
     content:''; position:absolute; width:340px; height:340px; border-radius:50%;
@@ -348,15 +382,58 @@
 
   .whatsapp-btn{
     display:inline-flex; align-items:center; gap:12px;
-    background: linear-gradient(135deg, #22c35e, var(--whatsapp));
+    background: linear-gradient(135deg, rgba(34,195,94,0.9), rgba(37,211,102,0.9));
     color:#04170b; font-family:'Sora',sans-serif; font-weight:700; font-size:17px;
     padding:19px 44px; border-radius:999px;
-    box-shadow: 0 0 0 rgba(37,211,102,0);
-    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease;
+    border:1px solid var(--glass-rim);
+    backdrop-filter: blur(12px) saturate(160%); -webkit-backdrop-filter: blur(12px) saturate(160%);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), 0 10px 25px -5px rgba(37,211,102,0.3);
+    transition: transform .4s cubic-bezier(.2,.8,.2,1), box-shadow .4s ease, border-color .4s ease;
+    position:relative; isolation:isolate;
+    --edge-proximity:0; --cursor-angle:45deg; --edge-sensitivity:35; --glow-padding:16px;
   }
   .whatsapp-btn:hover{
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 14px 40px -8px rgba(37,211,102,0.55);
+    border-color: rgba(255,255,255,0.7);
+    box-shadow: var(--glass-hi-top-hover), var(--glass-hi-bottom), 0 14px 40px -8px rgba(37,211,102,0.55);
+  }
+  .whatsapp-btn:active{
+    transform: translateY(0) scale(0.99);
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), 0 6px 18px -6px rgba(37,211,102,0.4);
+  }
+
+  /* ===== BorderGlow — adapted from React Bits, edge-light layer only =====
+     (the mesh-gradient re-fill layers from the source assume a plain dark card
+     background; this button already has its own green fill, so only the
+     cursor-tracking outer glow ring is ported — that's the component's
+     signature effect anyway) */
+  .whatsapp-btn .edge-light{
+    content:''; position:absolute; pointer-events:none; z-index:5;
+    inset: calc(var(--glow-padding) * -1);
+    border-radius: inherit;
+    mask-image: conic-gradient(from var(--cursor-angle) at center,
+      black 2.5%, transparent 10%, transparent 90%, black 97.5%);
+    opacity: calc((var(--edge-proximity) - var(--edge-sensitivity)) / (100 - var(--edge-sensitivity)));
+    mix-blend-mode: plus-lighter;
+    transition: opacity .25s ease-out;
+  }
+  .whatsapp-btn:not(:hover) .edge-light{ opacity:0; transition: opacity .75s ease-in-out; }
+  .whatsapp-btn .edge-light::before{
+    content:''; position:absolute; inset: var(--glow-padding); border-radius: inherit;
+    box-shadow:
+      inset 0 0 0 1px hsl(280 90% 78% / 100%),
+      inset 0 0 1px 0 hsl(280 90% 78% / 60%),
+      inset 0 0 3px 0 hsl(295 90% 76% / 50%),
+      inset 0 0 6px 0 hsl(320 90% 74% / 40%),
+      inset 0 0 15px 0 hsl(320 90% 74% / 30%),
+      inset 0 0 25px 2px hsl(199 90% 64% / 20%),
+      inset 0 0 50px 2px hsl(199 90% 64% / 10%),
+      0 0 1px 0 hsl(280 90% 78% / 60%),
+      0 0 3px 0 hsl(295 90% 76% / 50%),
+      0 0 6px 0 hsl(320 90% 74% / 40%),
+      0 0 15px 0 hsl(320 90% 74% / 30%),
+      0 0 25px 2px hsl(199 90% 64% / 20%),
+      0 0 50px 2px hsl(199 90% 64% / 10%);
   }
 
   .footer-links{
@@ -380,7 +457,8 @@
     .nav-links{ display:none; }
     .burger{ display:block; }
     .btn-nav{ display:none; }
-    .pricing-grid, .process-grid{ grid-template-columns:1fr; }
+    .pricing-grid{ grid-template-columns:1fr; }
+    .process-grid{ grid-template-columns:1fr; }
     .card.featured{ transform:scale(1); order:-1; }
     .card.featured:hover{ transform: translateY(-8px); }
     .hero{ padding-top:140px; }
@@ -448,7 +526,6 @@
           <div class="tier-price">₹9,999</div>
           <ul class="tier-features">
             <li>&#10003; Simple Landing Page</li>
-            <li>&#10003; Free 1-Year .in Domain</li>
             <li>&#10003; Mobile Optimized</li>
             <li>&#10003; WhatsApp Chat Button</li>
             <li>&#10003; Delivered in 48 Hours</li>
@@ -457,30 +534,15 @@
         </div>
 
         <div class="card featured reveal d1">
-          <div class="tier-badge">Most Popular</div>
           <div class="tier-name">Growth</div>
-          <div class="tier-price">₹16,999</div>
+          <div class="tier-price">₹19,999</div>
           <ul class="tier-features">
             <li>&#10003; Premium Multi-Section Landing Page</li>
-            <li>&#10003; Free 1-Year .in Domain</li>
             <li>&#10003; High-Speed Cloud Hosting</li>
             <li>&#10003; Google Maps &amp; Local SEO Setup</li>
             <li>&#10003; Delivered in 48 Hours</li>
           </ul>
           <a href="#contact" class="btn btn-primary">Discuss in DM</a>
-        </div>
-
-        <div class="card reveal d2">
-          <div class="tier-name">Unlimited</div>
-          <div class="tier-price">₹29,999</div>
-          <ul class="tier-features">
-            <li>&#10003; Premium Custom Website</li>
-            <li>&#10003; Free .com/.in Domain</li>
-            <li>&#10003; 20GB SSD Storage</li>
-            <li>&#10003; Priority Speed &amp; Maintenance</li>
-            <li>&#10003; Delivered in 48 Hours</li>
-          </ul>
-          <a href="#contact" class="btn btn-ghost">Contact for VIP</a>
         </div>
 
       </div>
@@ -537,6 +599,7 @@
     <h2 class="reveal">Connect Directly via DM</h2>
 
     <a href="https://wa.me/916202176976" target="_blank" rel="noopener" class="whatsapp-btn reveal">
+      <span class="edge-light"></span>
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17.6 6.32A8.86 8.86 0 0 0 12.02 4C7.42 4 3.68 7.72 3.68 12.3c0 1.47.39 2.9 1.13 4.16L3.6 20.4l4.05-1.06a8.9 8.9 0 0 0 4.36 1.11h.01c4.6 0 8.34-3.72 8.34-8.3a8.2 8.2 0 0 0-2.76-5.83Z" fill="#04170b"/></svg>
       Chat on WhatsApp
     </a>
@@ -564,8 +627,10 @@
   const style = document.createElement('style');
   style.textContent = `.nav-links.mobile-open{
     display:flex !important; position:absolute; top:100%; left:0; right:0;
-    background:#0a0813; backdrop-filter:none;
-    flex-direction:column; padding:24px 32px; gap:20px; border-bottom:1px solid rgba(255,255,255,0.08);
+    background:#0a0813; backdrop-filter:none; -webkit-backdrop-filter:none;
+    border:1px solid var(--glass-rim); border-top:none;
+    box-shadow: var(--glass-hi-top), var(--glass-hi-bottom), var(--glass-ambient);
+    flex-direction:column; padding:24px 32px; gap:20px;
   }`;
   document.head.appendChild(style);
 </script>
@@ -830,5 +895,48 @@
     });
   })();
 </script>
+
+<script>
+  // ===== BorderGlow — adapted from React Bits, ported to vanilla JS =====
+  // Same edge-proximity / cursor-angle math as the source's handlePointerMove,
+  // scoped only to .whatsapp-btn (the button that opens an actual chat/typing
+  // surface). Updates CSS custom properties the .edge-light layer reads from.
+  (function () {
+    const btn = document.querySelector('.whatsapp-btn');
+    if (!btn) return;
+
+    function centerOf(el) {
+      const r = el.getBoundingClientRect();
+      return [r.width / 2, r.height / 2];
+    }
+    function edgeProximity(el, x, y) {
+      const [cx, cy] = centerOf(el);
+      const dx = x - cx, dy = y - cy;
+      let kx = Infinity, ky = Infinity;
+      if (dx !== 0) kx = cx / Math.abs(dx);
+      if (dy !== 0) ky = cy / Math.abs(dy);
+      return Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
+    }
+    function cursorAngle(el, x, y) {
+      const [cx, cy] = centerOf(el);
+      const dx = x - cx, dy = y - cy;
+      if (dx === 0 && dy === 0) return 0;
+      let deg = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+      if (deg < 0) deg += 360;
+      return deg;
+    }
+
+    btn.addEventListener('pointermove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const edge = edgeProximity(btn, x, y);
+      const angle = cursorAngle(btn, x, y);
+      btn.style.setProperty('--edge-proximity', (edge * 100).toFixed(3));
+      btn.style.setProperty('--cursor-angle', angle.toFixed(3) + 'deg');
+    });
+  })();
+</script>
+
 </body>
 </html>
